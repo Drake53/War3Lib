@@ -1,0 +1,32 @@
+<Project>
+
+  <ImportGroup>
+    <Import Project="../Directory.Build.props" />
+  </ImportGroup>
+
+  <PropertyGroup>
+    <Owners>Drake53</Owners>
+    <Copyright>Copyright (c) Drake53 and Contributors</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    
+    <RepositoryUrl>https://github.com/Drake53/War3Lib</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="War3Api.Common" Version="1.31.1.1" />
+  </ItemGroup>
+
+<!--
+  <ItemGroup>
+    <PackageReference Remove="@(PackageReference)" />
+  </ItemGroup>
+  <PropertyGroup>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+-->
+
+</Project>
