@@ -14,7 +14,7 @@
     <PackageTags>replay csharp warcraft3 warcraft-iii</PackageTags>
 
     <PackageId>War3Lib.Mmd.Sources</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.0.2</PackageVersion>
   </PropertyGroup>
 
   <!-- Do not edit below this line -->
