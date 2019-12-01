@@ -139,7 +139,7 @@ namespace War3Lib.Mmd
         /// </remarks>
         public static void UpdateValue(string name, player whichPlayer, string value)
         {
-            UpdateValue(name, whichPlayer, Operator.Set, $"\"{value}\"", Type.String);
+            UpdateValue(name, whichPlayer, Operator.Set, $"\"{Pack(value)}\"", Type.String);
         }
 
         /// <summary>
