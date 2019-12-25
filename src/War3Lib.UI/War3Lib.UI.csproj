@@ -9,7 +9,7 @@
   <PropertyGroup>
     <Authors>Drake53, Quilnez</Authors>
 
-    <Description></Description>
+    <Description>UI system for Warcraft III maps.</Description>
     <PackageProjectUrl>https://github.com/Drake53/War3Lib/tree/master/src/War3Lib.UI</PackageProjectUrl>
     <PackageTags>ui csharp warcraft3 warcraft-iii</PackageTags>
 
