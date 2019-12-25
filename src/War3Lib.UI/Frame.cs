@@ -205,6 +205,12 @@ namespace War3Lib.UI
             }
         }
 
+        public string Name
+        {
+            get => _name;
+            set => _name = value;
+        }
+
         public string Text
         {
             get => BlzFrameGetText(_textFrame);
@@ -305,6 +311,30 @@ namespace War3Lib.UI
         public float Width => _width;
 
         public float Height => _height;
+
+        public float UnscaledWidth
+        {
+            get => _unscaledWidth;
+            set => SetSize(value, _unscaledHeight);
+        }
+
+        public float UnscaledHeight
+        {
+            get => _unscaledHeight;
+            set => SetSize(_unscaledWidth, value);
+        }
+
+        public float ValueMin
+        {
+            get => _valueMin;
+            set => SetMinMaxValue(value, _valueMax);
+        }
+
+        public float ValueMax
+        {
+            get => _valueMax;
+            set => SetMinMaxValue(_valueMin, value);
+        }
 
         public float LocalScale
         {
