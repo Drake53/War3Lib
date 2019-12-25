@@ -624,7 +624,7 @@ namespace War3Lib.UI
             CalculateRect();
             var x = _scaledScreenPositionX - (_width * _pivotX * Util.ScaleFactor);
             var y = _scaledScreenPositionY - (_height * _pivotY * Util.ScaleFactor);
-            if (_isSimple)
+            if (!_isSimple)
             {
                 x = NormalizePositionX(x, true);
             }
@@ -647,7 +647,10 @@ namespace War3Lib.UI
             var scaleFactor = scaled ? Util.ScaleFactor : 1f;
             var min = Util.FrameBoundWidth + (_width * _pivotX * scaleFactor);
             var max = Util.ResolutionWidth - Util.FrameBoundWidth - (_width * (1f - _pivotX) * scaleFactor);
-            return x < min ? min : x > max ? max : x;
+
+            // return x < min ? min : x > max ? max : x;
+            x = x < min ? min : x;
+            return x < max ? x : max;
         }
 
         private void CalculateRect()
