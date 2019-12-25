@@ -124,7 +124,7 @@ namespace War3Lib.UI
             Level = level;
             _visibleSelf = true;
             _enabledSelf = true;
-            _fontType = @"Fonts\FRIZQT__.TFF";
+            _fontType = @"Fonts\FRIZQT__.TTF";
             _fontSize = 0.013f;
             _fontFlags = 0;
             Value = 0f;
