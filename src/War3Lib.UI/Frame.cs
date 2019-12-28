@@ -87,26 +87,25 @@ namespace War3Lib.UI
             BlzLoadTOCFile(Util.TocFile);
         }
 
-        public Frame(bool isSimple, FrameType frameType, Frame parent, float x, float y, int level)
+        public Frame(bool isSimple, string frameType, Frame parent, float x, float y, int level)
         {
-            var frameTypeName = $"{FrameTypePrefix}{frameType}";
-            _context = GetStoredInteger(_gc, frameTypeName, "0");
-            var storedInt = GetStoredInteger(_gc, frameTypeName, $"{_context}");
-            StoreInteger(_gc, frameTypeName, "0", storedInt == 0 ? _context + 1 : storedInt);
+            _context = GetStoredInteger(_gc, frameType, "0");
+            var storedInt = GetStoredInteger(_gc, frameType, $"{_context}");
+            StoreInteger(_gc, frameType, "0", storedInt == 0 ? _context + 1 : storedInt);
 
             _parent = parent;
             _children = new List<Frame>();
-            _isSimple = IsSimple(frameType, isSimple);
+            _isSimple = isSimple;
 
-            _frame = _isSimple ? BlzCreateSimpleFrame(frameTypeName, DefaultFrame.Game, _context) : BlzCreateFrame(frameTypeName, DefaultFrame.Game, 0, _context);
-            _mainTexture = GetSubFrame(frameTypeName + "Texture");
-            _disabledTexture = GetSubFrame(frameTypeName + "Disabled");
-            _highlightTexture = GetSubFrame(frameTypeName + "Highlight");
-            _pushedTexture = GetSubFrame(frameTypeName + "Pushed");
-            _backgroundTexture = GetSubFrame(frameTypeName + "Background");
-            _borderTexture = GetSubFrame(frameTypeName + "Border");
-            _textFrame = GetSubFrame(frameTypeName + "Text");
-            _modelFrame = GetSubFrame(frameTypeName + "Model");
+            _frame = _isSimple ? BlzCreateSimpleFrame(frameType, DefaultFrame.Game, _context) : BlzCreateFrame(frameType, DefaultFrame.Game, 0, _context);
+            _mainTexture = GetSubFrame(frameType + "Texture");
+            _disabledTexture = GetSubFrame(frameType + "Disabled");
+            _highlightTexture = GetSubFrame(frameType + "Highlight");
+            _pushedTexture = GetSubFrame(frameType + "Pushed");
+            _backgroundTexture = GetSubFrame(frameType + "Background");
+            _borderTexture = GetSubFrame(frameType + "Border");
+            _textFrame = GetSubFrame(frameType + "Text");
+            _modelFrame = GetSubFrame(frameType + "Model");
 
             _inheritScale = true;
             _inheritOpacity = true;
@@ -119,8 +118,7 @@ namespace War3Lib.UI
             var temp = Util.ReferenceDpi2Pixels;
             _unscaledWidth = BlzFrameGetWidth(_frame) * temp;
             _unscaledHeight = BlzFrameGetHeight(_frame) * temp;
-            _frameType = frameType;
-            _name = $"{frameTypeName}{_context}";
+            _name = $"{frameType}{_context}";
             Level = level;
             _visibleSelf = true;
             _enabledSelf = true;
@@ -160,6 +158,12 @@ namespace War3Lib.UI
                 AnyEvent?.Invoke(this, null);
                 return false;
             }));
+        }
+
+        public Frame(bool isSimple, FrameType frameType, Frame parent, float x, float y, int level)
+            : this(IsSimple(frameType, isSimple), $"{FrameTypePrefix}{frameType}", parent, x, y, level)
+        {
+            _frameType = frameType;
         }
 
         public event EventHandler AnyEvent;

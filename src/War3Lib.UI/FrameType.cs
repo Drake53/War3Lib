@@ -2,6 +2,8 @@
 {
     public enum FrameType
     {
+        Custom = default,
+
         Text,
         Texture,
         Button,
