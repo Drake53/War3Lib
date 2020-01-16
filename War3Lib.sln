@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "War3Lib.Mmd", "src\War3Lib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "War3Lib.UI", "src\War3Lib.UI\War3Lib.UI.csproj", "{621F65D4-BC79-4F72-A870-E9533E8B0500}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "War3Lib.Event", "src\War3Lib.Event\War3Lib.Event.csproj", "{F6BEB5FF-5916-4D98-8757-9918D6BB8CFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{621F65D4-BC79-4F72-A870-E9533E8B0500}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{621F65D4-BC79-4F72-A870-E9533E8B0500}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{621F65D4-BC79-4F72-A870-E9533E8B0500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6BEB5FF-5916-4D98-8757-9918D6BB8CFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6BEB5FF-5916-4D98-8757-9918D6BB8CFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6BEB5FF-5916-4D98-8757-9918D6BB8CFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6BEB5FF-5916-4D98-8757-9918D6BB8CFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
