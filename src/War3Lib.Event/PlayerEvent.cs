@@ -9,11 +9,13 @@ namespace War3Lib.Event
     {
         private static readonly TriggerEventWrapper<PlayerEventArgs> _anyPlayerLeave = new TriggerEventWrapper<PlayerEventArgs>();
         private static readonly TriggerEventWrapper<PlayerChatEventArgs> _anyPlayerChat = new TriggerEventWrapper<PlayerChatEventArgs>();
+        private static readonly TriggerEventWrapper<PlayerKeyEventArgs> _anyPlayerKey = new TriggerEventWrapper<PlayerKeyEventArgs>();
 
         private static readonly Dictionary<player, PlayerEvent> _dict = new Dictionary<player, PlayerEvent>();
 
         private readonly TriggerEventWrapper<PlayerEventArgs> _playerLeave = new TriggerEventWrapper<PlayerEventArgs>();
         private readonly TriggerEventWrapper<PlayerChatEventArgs> _playerChat = new TriggerEventWrapper<PlayerChatEventArgs>();
+        private readonly TriggerEventWrapper<PlayerKeyEventArgs> _playerKey = new TriggerEventWrapper<PlayerKeyEventArgs>();
 
         private readonly player _whichPlayer;
 
@@ -34,6 +36,12 @@ namespace War3Lib.Event
             remove => _anyPlayerChat.RemoveEventHandler(value);
         }
 
+        public static event EventHandler<PlayerKeyEventArgs> AnyPlayerKey
+        {
+            add => Add(_anyPlayerKey, value, PlayerKeyEvent, GetPlayerKeyEventResponse);
+            remove => _anyPlayerKey.RemoveEventHandler(value);
+        }
+
         public event EventHandler<PlayerEventArgs> PlayerLeave
         {
             add => AddOne(_playerLeave, value, PlayerLeaveEvent, GetPlayerLeaveEventResponse);
@@ -44,6 +52,12 @@ namespace War3Lib.Event
         {
             add => AddOne(_playerChat, value, PlayerChatEvent, GetPlayerChatEventResponse);
             remove => _playerChat.RemoveEventHandler(value);
+        }
+
+        public event EventHandler<PlayerKeyEventArgs> PlayerKey
+        {
+            add => AddOne(_playerKey, value, PlayerKeyEvent, GetPlayerKeyEventResponse);
+            remove => _playerKey.RemoveEventHandler(value);
         }
 
         public static PlayerEvent GetPlayerEvent(player whichPlayer)
@@ -58,14 +72,26 @@ namespace War3Lib.Event
             return playerEvent;
         }
 
-        private static @event PlayerLeaveEvent(trigger trigger, player player)
+        private static void PlayerLeaveEvent(trigger trigger, player player)
         {
-            return TriggerRegisterPlayerEvent(trigger, player, EVENT_PLAYER_LEAVE);
+            TriggerRegisterPlayerEvent(trigger, player, EVENT_PLAYER_LEAVE);
         }
 
-        private static @event PlayerChatEvent(trigger trigger, player player)
+        private static void PlayerChatEvent(trigger trigger, player player)
         {
-            return TriggerRegisterPlayerChatEvent(trigger, player, string.Empty, false);
+            TriggerRegisterPlayerChatEvent(trigger, player, string.Empty, false);
+        }
+
+        private static void PlayerKeyEvent(trigger trigger, player player)
+        {
+            for (var keyType = 8; keyType <= 255; keyType++)
+            {
+                for (var metaKey = 0; metaKey <= 15; metaKey++)
+                {
+                    BlzTriggerRegisterPlayerKeyEvent(trigger, player, ConvertOsKeyType(keyType), metaKey, true);
+                    BlzTriggerRegisterPlayerKeyEvent(trigger, player, ConvertOsKeyType(keyType), metaKey, false);
+                }
+            }
         }
 
         private static PlayerEventArgs GetPlayerLeaveEventResponse()
@@ -78,12 +104,17 @@ namespace War3Lib.Event
             return new PlayerChatEventArgs(GetTriggerPlayer(), GetEventPlayerChatString());
         }
 
-        private static void Add<TEventArgs>(TriggerEventWrapper<TEventArgs> wrapper, EventHandler<TEventArgs> handler, Func<trigger, player, @event> registrar, Func<TEventArgs> responder)
+        private static PlayerKeyEventArgs GetPlayerKeyEventResponse()
+        {
+            return new PlayerKeyEventArgs(GetTriggerPlayer(), BlzGetTriggerPlayerKey(), BlzGetTriggerPlayerMetaKey(), BlzGetTriggerPlayerIsKeyDown());
+        }
+
+        private static void Add<TEventArgs>(TriggerEventWrapper<TEventArgs> wrapper, EventHandler<TEventArgs> handler, Action<trigger, player> registrar, Func<TEventArgs> responder)
             where TEventArgs : EventArgs
         {
             if (wrapper.IsNull)
             {
-                var events = new List<Func<trigger, @event>>();
+                var events = new List<Action<trigger>>();
                 for (var i = 0; i < GetBJMaxPlayers(); i++)
                 {
                     var player = Player(i);
@@ -96,7 +127,7 @@ namespace War3Lib.Event
             wrapper.Event += handler;
         }
 
-        private void AddOne<TEventArgs>(TriggerEventWrapper<TEventArgs> wrapper, EventHandler<TEventArgs> handler, Func<trigger, player, @event> registrar, Func<TEventArgs> responder)
+        private void AddOne<TEventArgs>(TriggerEventWrapper<TEventArgs> wrapper, EventHandler<TEventArgs> handler, Action<trigger, player> registrar, Func<TEventArgs> responder)
             where TEventArgs : EventArgs
         {
             if (wrapper.IsNull)

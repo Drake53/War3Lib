@@ -12,12 +12,12 @@ namespace War3Lib.Event
 
         internal bool IsNull => Event is null;
 
-        internal void CreateWrapper(Func<TEventArgs> eventArgsFunc, Func<trigger, @event> @event)
+        internal void CreateWrapper(Func<TEventArgs> eventArgsFunc, Action<trigger> registrar)
         {
-            CreateWrapper(eventArgsFunc, new[] { @event });
+            CreateWrapper(eventArgsFunc, new[] { registrar });
         }
 
-        internal void CreateWrapper(Func<TEventArgs> eventArgsFunc, IEnumerable<Func<trigger, @event>> events)
+        internal void CreateWrapper(Func<TEventArgs> eventArgsFunc, IEnumerable<Action<trigger>> registrars)
         {
             _trigger = CreateTrigger();
             _triggercondition = TriggerAddCondition(_trigger, Condition(() =>
@@ -26,9 +26,9 @@ namespace War3Lib.Event
                 return false;
             }));
 
-            foreach (var @event in events)
+            foreach (var registrar in registrars)
             {
-                @event(_trigger);
+                registrar(_trigger);
             }
         }
 
