@@ -1,6 +1,6 @@
 ﻿using static War3Api.Common;
 
-namespace War3Lib.Event
+namespace War3Lib.Event.Player
 {
     public class PlayerChatEventArgs : PlayerEventArgs
     {

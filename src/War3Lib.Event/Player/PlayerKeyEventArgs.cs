@@ -1,6 +1,6 @@
 ﻿using static War3Api.Common;
 
-namespace War3Lib.Event
+namespace War3Lib.Event.Player
 {
     public class PlayerKeyEventArgs : PlayerEventArgs
     {
@@ -21,5 +21,11 @@ namespace War3Lib.Event
         public int MetaKey => _metaKey;
 
         public bool KeyDown => _keyDown;
+
+        public bool Alt => (_metaKey & 4) != 0;
+
+        public bool Control => (_metaKey & 2) != 0;
+
+        public bool Shift => (_metaKey & 1) != 0;
     }
 }
