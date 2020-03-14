@@ -9,6 +9,75 @@ namespace War3Lib.Event
 {
     public sealed class PlayerEvent
     {
+        /*
+    constant playerevent EVENT_PLAYER_STATE_LIMIT               = ConvertPlayerEvent(11)
+        constant native GetEventPlayerState takes nothing returns playerstate
+    constant playerevent EVENT_PLAYER_ALLIANCE_CHANGED          = ConvertPlayerEvent(12)
+
+    constant playerevent EVENT_PLAYER_DEFEAT                    = ConvertPlayerEvent(13)
+        constant native GetTriggerPlayer takes nothing returns player
+    constant playerevent EVENT_PLAYER_VICTORY                   = ConvertPlayerEvent(14)
+        constant native GetTriggerPlayer takes nothing returns player
+    constant playerevent EVENT_PLAYER_LEAVE                     = ConvertPlayerEvent(15)
+    constant playerevent EVENT_PLAYER_CHAT                      = ConvertPlayerEvent(16)
+    constant playerevent EVENT_PLAYER_END_CINEMATIC             = ConvertPlayerEvent(17)
+
+    constant playerevent        EVENT_PLAYER_ARROW_LEFT_DOWN            = ConvertPlayerEvent(261)
+    constant playerevent        EVENT_PLAYER_ARROW_LEFT_UP              = ConvertPlayerEvent(262)
+    constant playerevent        EVENT_PLAYER_ARROW_RIGHT_DOWN           = ConvertPlayerEvent(263)
+    constant playerevent        EVENT_PLAYER_ARROW_RIGHT_UP             = ConvertPlayerEvent(264)
+    constant playerevent        EVENT_PLAYER_ARROW_DOWN_DOWN            = ConvertPlayerEvent(265)
+    constant playerevent        EVENT_PLAYER_ARROW_DOWN_UP              = ConvertPlayerEvent(266)
+    constant playerevent        EVENT_PLAYER_ARROW_UP_DOWN              = ConvertPlayerEvent(267)
+    constant playerevent        EVENT_PLAYER_ARROW_UP_UP                = ConvertPlayerEvent(268)
+    constant playerevent        EVENT_PLAYER_MOUSE_DOWN                 = ConvertPlayerEvent(305)
+    constant playerevent        EVENT_PLAYER_MOUSE_UP                   = ConvertPlayerEvent(306)
+    constant playerevent        EVENT_PLAYER_MOUSE_MOVE                 = ConvertPlayerEvent(307)
+    constant playerevent        EVENT_PLAYER_SYNC_DATA                  = ConvertPlayerEvent(309)
+    constant playerevent        EVENT_PLAYER_KEY                        = ConvertPlayerEvent(311)
+    constant playerevent        EVENT_PLAYER_KEY_DOWN                   = ConvertPlayerEvent(312)
+    constant playerevent        EVENT_PLAYER_KEY_UP                     = ConvertPlayerEvent(313)
+    */
+
+        // native TriggerRegisterPlayerAllianceChange takes trigger whichTrigger, player whichPlayer, alliancetype whichAlliance returns event
+        // native TriggerRegisterPlayerStateEvent takes trigger whichTrigger, player whichPlayer, playerstate whichState, limitop opcode, real limitval returns event
+            // constant playerstate PLAYER_STATE_GAME_RESULT               = ConvertPlayerState(0)
+
+            // current resource levels
+            // constant playerstate PLAYER_STATE_RESOURCE_GOLD             = ConvertPlayerState(1)
+            // constant playerstate PLAYER_STATE_RESOURCE_LUMBER           = ConvertPlayerState(2)
+            // constant playerstate PLAYER_STATE_RESOURCE_HERO_TOKENS      = ConvertPlayerState(3)
+            // constant playerstate PLAYER_STATE_RESOURCE_FOOD_CAP         = ConvertPlayerState(4)
+            // constant playerstate PLAYER_STATE_RESOURCE_FOOD_USED        = ConvertPlayerState(5)
+            // constant playerstate PLAYER_STATE_FOOD_CAP_CEILING          = ConvertPlayerState(6)
+
+            // constant playerstate PLAYER_STATE_GIVES_BOUNTY              = ConvertPlayerState(7)
+            // constant playerstate PLAYER_STATE_ALLIED_VICTORY            = ConvertPlayerState(8)
+            // constant playerstate PLAYER_STATE_PLACED                    = ConvertPlayerState(9)
+            // constant playerstate PLAYER_STATE_OBSERVER_ON_DEATH         = ConvertPlayerState(10)
+            // constant playerstate PLAYER_STATE_OBSERVER                  = ConvertPlayerState(11)
+            // constant playerstate PLAYER_STATE_UNFOLLOWABLE              = ConvertPlayerState(12)
+
+            // taxation rate for each resource
+            // constant playerstate PLAYER_STATE_GOLD_UPKEEP_RATE          = ConvertPlayerState(13)
+            // constant playerstate PLAYER_STATE_LUMBER_UPKEEP_RATE        = ConvertPlayerState(14)
+
+            // cumulative resources collected by the player during the mission
+            // constant playerstate PLAYER_STATE_GOLD_GATHERED             = ConvertPlayerState(15)
+            // constant playerstate PLAYER_STATE_LUMBER_GATHERED           = ConvertPlayerState(16)
+
+            // constant playerstate PLAYER_STATE_NO_CREEP_SLEEP            = ConvertPlayerState(25)
+        // native BlzTriggerRegisterPlayerSyncEvent           takes trigger whichTrigger, player whichPlayer, string prefix, boolean fromServer returns event
+            // native BlzGetTriggerSyncPrefix                     takes nothing returns string
+            // native BlzGetTriggerSyncData                       takes nothing returns string
+            
+            // native BlzGetTriggerPlayerMouseX                   takes nothing returns real
+            // native BlzGetTriggerPlayerMouseY                   takes nothing returns real
+            // native BlzGetTriggerPlayerMousePosition            takes nothing returns location
+            // native BlzGetTriggerPlayerMouseButton              takes nothing returns mousebuttontype
+
+
+
         private static readonly TriggerEventWrapper<PlayerEventArgs> _anyPlayerLeave = new TriggerEventWrapper<PlayerEventArgs>();
         private static readonly TriggerEventWrapper<PlayerChatEventArgs> _anyPlayerChat = new TriggerEventWrapper<PlayerChatEventArgs>();
         private static readonly TriggerEventWrapper<PlayerKeyEventArgs> _anyPlayerKeyDown = new TriggerEventWrapper<PlayerKeyEventArgs>();
